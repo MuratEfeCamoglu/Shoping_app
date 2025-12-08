@@ -56,23 +56,50 @@ class CartPage extends StatelessWidget {
         children: [
           Expanded(
             child:Center(
-              child: cart.isEmpty
-              ?Text("Your cart is empty")
-              : ListView.builder(
-                itemCount: cart.length,
-                itemBuilder: (context, index) {
-                  final item = cart[index];
-              
-                  return ListTile(
-                    title: Text(item.name),
-                    subtitle: Text('\$${item.price.toStringAsFixed(2)}'),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.remove_circle_outline),
-                      onPressed: () => removeItemFromCart(context, item),
-                    ),
-                  );
-                },
-              ),
+              // ... CartPage kodunun geri kalanı aynı ...
+
+            child: cart.isEmpty
+                ? const Text("Your cart is empty") // const ekledim
+                : ListView.builder(
+                    itemCount: cart.length,
+                    itemBuilder: (context, index) {
+                      final item = cart[index];
+
+                      // ListTile'ı Container içine alıp renk veriyoruz
+                      return Container(
+                        decoration: BoxDecoration(
+                          // Kart rengi (Secondary daha açık bir renkse iyi durur)
+                          color: Theme.of(context).colorScheme.secondary, 
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: ListTile(
+                          title: Text(
+                            item.name,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '\$${item.price.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.remove_circle_outline,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                            onPressed: () => removeItemFromCart(context, item),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+// ... Kalan kodlar ...
             ),
           ),
           // pay button
