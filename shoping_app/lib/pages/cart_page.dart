@@ -7,19 +7,17 @@ import 'package:shoping_app/models/proudct.dart';
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
+  // Ürün silme fonksiyonu
   void removeItemFromCart(BuildContext context, Proudct product) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         content: const Text('Remove this item from cart?'),
         actions: [
-          // Cancel
           MaterialButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('Cancel'),
           ),
-
-          // Yes
           MaterialButton(
             onPressed: () {
               context.read<Shop>().removeFromCart(product);
@@ -32,44 +30,55 @@ class CartPage extends StatelessWidget {
     );
   }
 
+  // Ödeme butonu fonksiyonu
   void payButtonPressed(BuildContext context) {
-    // Payment logic here
-    showDialog(context: context,builder:(context)=> AlertDialog(
-      content: const Text('Payment Successful!'),
-     
-    ));
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        content: Text('Payment Successful!'),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final cart = context.watch<Shop>().cart;
+    // Temadan renkleri alıyoruz
+    final Color textColor = Theme.of(context).colorScheme.inversePrimary;
+    final Color itemBackgroundColor = Theme.of(context).colorScheme.secondary;
+    final Color backgroundColor = Theme.of(context).colorScheme.surface; // veya background
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        foregroundColor: textColor, // Başlık rengi koyu
         title: const Text('Cart Page'),
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: backgroundColor,
       body: Column(
         children: [
+          // Sepet Listesi
           Expanded(
-            child:Center(
-              // ... CartPage kodunun geri kalanı aynı ...
-
             child: cart.isEmpty
-                ? const Text("Your cart is empty") // const ekledim
+                ? Center(
+                    child: Text(
+                      "Your cart is empty",
+                      style: TextStyle(
+                        color: textColor, // Boş sepet yazısını görünür yaptık
+                        fontSize: 18,
+                      ),
+                    ),
+                  )
                 : ListView.builder(
                     itemCount: cart.length,
                     itemBuilder: (context, index) {
                       final item = cart[index];
 
-                      // ListTile'ı Container içine alıp renk veriyoruz
+                      // Liste elemanı tasarımı
                       return Container(
                         decoration: BoxDecoration(
-                          // Kart rengi (Secondary daha açık bir renkse iyi durur)
-                          color: Theme.of(context).colorScheme.secondary, 
+                          color: itemBackgroundColor, // Beyaz kart
                           borderRadius: BorderRadius.circular(8),
                         ),
                         margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -77,20 +86,20 @@ class CartPage extends StatelessWidget {
                           title: Text(
                             item.name,
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              color: textColor, // Koyu yazı rengi
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           subtitle: Text(
                             '\$${item.price.toStringAsFixed(2)}',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              color: textColor, // Koyu yazı rengi
                             ),
                           ),
                           trailing: IconButton(
                             icon: Icon(
                               Icons.remove_circle_outline,
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              color: textColor, // İkon rengi
                             ),
                             onPressed: () => removeItemFromCart(context, item),
                           ),
@@ -98,23 +107,22 @@ class CartPage extends StatelessWidget {
                       );
                     },
                   ),
-
-// ... Kalan kodlar ...
-            ),
           ),
-          // pay button
-          
-          
+
+          // Ödeme Butonu (Pay Now)
           Padding(
             padding: const EdgeInsets.all(50.0),
-            child: MyButton(onTap:()=> payButtonPressed(context), child: const Text('Pay Now')),
+            child: MyButton(
+              onTap: () => payButtonPressed(context),
+              child: Text(
+                'Pay Now',
+                style: TextStyle(
+                   color: textColor, // Buton içindeki yazının rengi
+                   fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
           ),
-
-
-
-
-
-
         ],
       ),
     );

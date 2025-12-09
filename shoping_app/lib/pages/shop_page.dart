@@ -19,7 +19,7 @@ class ShopPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/cart-page');
+              Navigator.pushNamed(context, '/cart');
             },
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
@@ -61,7 +61,7 @@ class ShopPage extends StatelessWidget {
                 // Önce drawer'ı kapat
                 Navigator.pop(context);
                 // Sonra sepet sayfasına git
-                Navigator.pushNamed(context, '/cart-page');
+                Navigator.pushNamed(context, '/cart');
               },
             ),
           ],

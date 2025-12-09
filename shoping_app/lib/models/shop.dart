@@ -6,28 +6,28 @@ class Shop extends ChangeNotifier {
   // Shop'taki ürünler
   final List<Proudct> _shopItems = [
     Proudct(
-      name: 'Laptop',
+      name: 'Sneakers',
       description: 'A high-performance laptop for all your computing needs.',
       price: 999.99,
-      imageUrl: 'https://example.com/laptop.jpg',
+      imageUrl: "assets/shoes.jpg",
     ),
     Proudct(
-      name: 'Smartphone',
+      name: 'watch',
       description: 'A sleek smartphone with the latest features.',
       price: 699.99,
-      imageUrl: 'https://example.com/smartphone.jpg',
+      imageUrl: 'assets/watch.png',
     ),
     Proudct(
-      name: 'Headphones',
+      name: 'Hoodies',
       description: 'Noise-cancelling headphones for immersive sound experience.',
       price: 199.99,
-      imageUrl: 'https://example.com/headphones.jpg',
+      imageUrl: 'assets/hoodie.png',
     ),
     Proudct(
-      name: 'Smartwatch',
+      name: 'glasses',
       description: 'A stylish smartwatch to keep you connected on the go.',
       price: 249.99,
-      imageUrl: 'https://example.com/smartwatch.jpg',
+      imageUrl: 'assets/glases.png',
     ),
   ];
 
