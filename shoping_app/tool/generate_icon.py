@@ -46,7 +46,7 @@ def draw_glyph(image, glyph_size):
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    # Tam simge: iOS, web, Windows, macOS ve eski Android sürümleri
+    # Tam simge: iOS, web ve eski Android sürümleri
     icon = Image.new("RGB", (SIZE, SIZE), BACKGROUND)
     draw_glyph(icon, int(SIZE * 0.72))
     icon.save(os.path.join(OUT_DIR, "app_icon.png"))
