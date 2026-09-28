@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoping_app/components/my_button.dart';
 import 'package:shoping_app/models/shop.dart';
-import 'package:shoping_app/models/proudct.dart';
+import 'package:shoping_app/models/product.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   // Ürün silme fonksiyonu
-  void removeItemFromCart(BuildContext context, Proudct product) {
+  void removeItemFromCart(BuildContext context, Product product) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -32,6 +32,21 @@ class CartPage extends StatelessWidget {
 
   // Ödeme butonu fonksiyonu
   void payButtonPressed(BuildContext context) {
+    final shop = context.read<Shop>();
+
+    // Sepet boşsa ödeme yapılmasın
+    if (shop.cart.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          content: Text('Add items to your cart before paying.'),
+        ),
+      );
+      return;
+    }
+
+    // Ödeme başarılı: sepeti boşalt
+    shop.clearCart();
     showDialog(
       context: context,
       builder: (context) => const AlertDialog(

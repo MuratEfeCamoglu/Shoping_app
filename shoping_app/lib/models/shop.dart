@@ -1,52 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:shoping_app/models/proudct.dart';
+import 'package:shoping_app/models/product.dart';
 
 class Shop extends ChangeNotifier {
 
   // Shop'taki ürünler
-  final List<Proudct> _shopItems = [
-    Proudct(
+  final List<Product> _shopItems = [
+    Product(
       name: 'Sneakers',
-      description: 'A high-performance laptop for all your computing needs.',
+      description: 'Lightweight, comfortable sneakers for everyday wear.',
       price: 999.99,
       imageUrl: "assets/shoes.jpg",
     ),
-    Proudct(
-      name: 'watch',
-      description: 'A sleek smartphone with the latest features.',
+    Product(
+      name: 'Watch',
+      description: 'A classic wristwatch with a minimalist design.',
       price: 699.99,
       imageUrl: 'assets/watch.png',
     ),
-    Proudct(
+    Product(
       name: 'Hoodies',
-      description: 'Noise-cancelling headphones for immersive sound experience.',
+      description: 'A soft, warm hoodie for cool days.',
       price: 199.99,
       imageUrl: 'assets/hoodie.png',
     ),
-    Proudct(
-      name: 'glasses',
-      description: 'A stylish smartwatch to keep you connected on the go.',
+    Product(
+      name: 'Glasses',
+      description: 'Stylish glasses with UV-protective lenses.',
       price: 249.99,
       imageUrl: 'assets/glases.png',
     ),
   ];
 
   // Sepet
-  final List<Proudct> _cart = [];
+  final List<Product> _cart = [];
 
   // Getter'lar
-  List<Proudct> get shopItems => _shopItems;
-  List<Proudct> get cart => _cart;
+  List<Product> get shopItems => _shopItems;
+  List<Product> get cart => _cart;
 
   // Sepete ekle
-  void addToCart(Proudct product) {
+  void addToCart(Product product) {
     _cart.add(product);
     notifyListeners();
   }
 
   // Sepetten çıkar
-  void removeFromCart(Proudct product) {
+  void removeFromCart(Product product) {
     _cart.remove(product);
+    notifyListeners();
+  }
+
+  // Sepeti boşalt
+  void clearCart() {
+    _cart.clear();
     notifyListeners();
   }
 }

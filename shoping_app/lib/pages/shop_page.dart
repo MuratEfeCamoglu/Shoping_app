@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoping_app/models/shop.dart';
-import 'package:shoping_app/components/my_proudct_tile.dart';
+import 'package:shoping_app/components/my_product_tile.dart';
+import 'package:shoping_app/components/my_drawer.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
@@ -25,51 +26,9 @@ class ShopPage extends StatelessWidget {
           ),
         ],
       ),
-      // --- DÜZELTME BURADA BAŞLIYOR (DRAWER) ---
-      drawer: Drawer(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        child: Column(
-          children: [
-            // Logo veya Başlık
-            DrawerHeader(
-              child: Center(
-                child: Icon(
-                  Icons.shopping_bag,
-                  size: 72,
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                ),
-              ),
-            ),
-            
-            const SizedBox(height: 25),
-
-            // Shop Butonu
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Shop"),
-              onTap: () {
-                // Zaten Shop sayfasındayız, sadece drawer'ı kapatalım
-                Navigator.pop(context);
-              },
-            ),
-
-            // Cart Butonu
-            ListTile(
-              leading: const Icon(Icons.shopping_cart),
-              title: const Text("Cart"),
-              onTap: () {
-                // Önce drawer'ı kapat
-                Navigator.pop(context);
-                // Sonra sepet sayfasına git
-                Navigator.pushNamed(context, '/cart');
-              },
-            ),
-          ],
-        ),
-      ),
-      // --- DÜZELTME BİTİŞ ---
+      drawer: const MyDrawer(),
       
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: ListView(
         children: [
           const SizedBox(height: 25),
@@ -91,7 +50,7 @@ class ShopPage extends StatelessWidget {
               padding: const EdgeInsets.all(15),
               itemBuilder: (context, index) {
                 final product = products[index];
-                return MyProudctTile(product: product);
+                return MyProductTile(product: product);
               },
             ),
           ),

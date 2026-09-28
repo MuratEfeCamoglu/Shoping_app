@@ -1,11 +1,11 @@
 {
-    "name": "shoping_app",
-    "short_name": "shoping_app",
+    "name": "Minimal Shop",
+    "short_name": "Minimal Shop",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#E0E0E0",
+    "theme_color": "#212121",
+    "description": "Premium quality products.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

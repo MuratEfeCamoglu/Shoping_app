@@ -46,6 +46,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -88,3 +89,22 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Uygulama simgesi. Kaynak görseller: python tool/generate_icon.py
+# Simgeleri yeniden üretmek için: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: "assets/icon/app_icon.png"
+  android: true
+  adaptive_icon_background: "#E0E0E0"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  ios: true
+  remove_alpha_ios: true
+  web:
+    generate: true
+    background_color: "#E0E0E0"
+    theme_color: "#212121"
+  windows:
+    generate: true
+    icon_size: 256
+  macos:
+    generate: true

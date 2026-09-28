@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shoping_app/models/proudct.dart';
+import 'package:shoping_app/models/product.dart';
 import 'package:shoping_app/models/shop.dart';
 
-class MyProudctTile extends StatelessWidget {
-  final Proudct product;
+class MyProductTile extends StatelessWidget {
+  final Product product;
 
-  const MyProudctTile({
+  const MyProductTile({
     super.key,
     required this.product,
   });
 
-  void addToCart(BuildContext context, Proudct product) {
+  void addToCart(BuildContext context, Product product) {
     // ÖNEMLİ DÜZELTME 1:
     // Dialog açılmadan önce Shop sağlayıcısına erişiyoruz.
     // Böylece Dialog'un kendi context'i içinde kaybolmuyoruz.
@@ -57,51 +57,43 @@ class MyProudctTile extends StatelessWidget {
       width: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // DÜZELTME 2: Öğelerin arasını açmak için spaceBetween
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, 
         children: [
-          // BURADAKİ GEREKSİZ 'COLUMN' KALDIRILDI
-          // Eski kodda Column içinde Column olduğu için spaceBetween çalışmıyordu.
-          
           // 1. Bölüm: Resim ve Yazılar
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(12), // Resim köşelerini de yuvarlayalım
-                  ),
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(25),
-                  child: Image.asset(
-                    product.imageUrl,
-                    fit: BoxFit.contain,
-                  ),
-                ),
+          // Resim kalan boşluğu doldurur; böylece yazı büyüse bile kart taşmaz
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(12), // Resim köşelerini de yuvarlayalım
               ),
-              const SizedBox(height: 25),
-              Text(
-                product.name,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+              width: double.infinity,
+              padding: const EdgeInsets.all(25),
+              child: Image.asset(
+                product.imageUrl,
+                fit: BoxFit.contain,
               ),
-              const SizedBox(height: 10),
-              Text(
-                product.description,
-                style: TextStyle(
-                  fontWeight:FontWeight.bold,
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                ),
-              ),
-            ],
+            ),
           ),
-          
-          // 2. Bölüm: Fiyat ve Buton (En alta itilecek)
+          const SizedBox(height: 25),
+          Text(
+            product.name,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            product.description,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
+
+          // 2. Bölüm: Fiyat ve Buton
           Padding( // Biraz boşluk ekleyelim
             padding: const EdgeInsets.only(top: 25.0),
             child: Row(
